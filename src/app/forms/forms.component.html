@@ -1,0 +1,61 @@
+<!-- Form -->
+<div class="main">
+    <div *ngIf="!submitted" class="form_wrapper">
+        <div class="form_container">
+        <div class="title_container">
+            <h2><span class="theme">Create</span> an account</h2>
+        </div>
+        <div class="row clearfix">
+            <div class="">
+            <form autocomplete="off" #candidateFrm="ngForm" (ngSubmit)="onSubmit(candidateFrm)">
+                <div class="input_field"> <span><i aria-hidden="true" class="fa fa-envelope" [ngClass]="getClass(candidateFrm,'email')"></i></span>
+                <input type="email" name="email" placeholder="Email" [(ngModel)]="candidate.email" required email />
+                </div>
+                <div class="input_field"> <span><i aria-hidden="true" class="fa fa-lock" [ngClass]="getClass(candidateFrm,'password')"></i></span>
+                <input type="password" name="password" placeholder="Password" [(ngModel)]="candidate.password" required />
+                </div>
+                <div class="input_field"> <span><i aria-hidden="true" class="fa fa-lock" [ngClass]="getClass(candidateFrm,'password1')"></i></span>
+                <input type="password" name="password1" placeholder="Re-type Password" [(ngModel)]="candidate.password1" (keyup)="checkPasswords(candidateFrm)" required />
+                </div>
+                <div class="row clearfix">
+                <div class="col_half">
+                    <div class="input_field"> <span><i aria-hidden="true" class="fa fa-user" [ngClass]="getClass(candidateFrm,'fname')"></i></span>
+                    <input type="text" name="fname" placeholder="First Name" [(ngModel)]="candidate.fname" required/>
+                    </div>
+                </div>
+                <div class="col_half">
+                    <div class="input_field"> <span><i aria-hidden="true" class="fa fa-user" [ngClass]="getClass(candidateFrm,'lname')"></i></span>
+                    <input type="text" name="lname" placeholder="Last Name" [(ngModel)]="candidate.lname" required />
+                    </div>
+                </div>
+                </div>
+                <button class="button" type="submit" [ngClass]="{'disabled': candidateFrm.invalid}" [disabled]="candidateFrm.invalid">Register</button>
+            </form>
+            </div>
+        </div>
+        </div>
+    </div>
+    <!-- Form -->
+
+    <div *ngIf="submitted" class="results">
+        <h2>Thank you for registering an account with us!</h2>
+        <table>
+            <tr>
+                <td>First Name:</td>
+                <td>{{ candidate.fname }}</td>
+            </tr>
+            <tr>
+                <td>Last Name:</td>
+                <td>{{ candidate.lname }}</td>
+            </tr>
+            <tr>
+                <td>Email:</td>
+                <td>{{ candidate.email }}</td>
+            </tr>
+            <tr>
+                <td>Password:</td>
+                <td>{{ candidate.password }}</td>
+            </tr>
+        </table>
+    </div>
+</div>
